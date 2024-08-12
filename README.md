@@ -14,20 +14,31 @@ And the admin can login only by the admin passphrase.
 
 
 **FEATURES**
-    **User**
+
+   **User**
 Login & Signup: Secure user authentication.
+
 Home:  Without signup user can get product informations.
+
 Product page:Each medicine has a dedicated page displaying detailed information such as name,description, price, and available stock.
+
 Cart Adding:User can add/edit/delete products from/to cart
+
 Contact us:Message system
-Chekout:Prescription adding page 
+
+Chekout:Prescription adding page
+
 Logout: Securely end your session.
 
    **Admin**
  Login & Signup: Secure admin authentication through admin passphrase.
+ 
  Dashboard:Product Management(add,edit,delete).
+ 
  Message management:Get message from user.
+ 
  Checkout management:Check prescription uploadings
+ 
  Logout: Securely end your session.
 
 
