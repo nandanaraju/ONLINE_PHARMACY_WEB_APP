@@ -8,7 +8,7 @@ const ProductCards = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("http://localhost:5000/products");
+                const res = await fetch("/api/products");
                 const data = await res.json();
                 setProducts(data);
             } catch (error) {
@@ -22,7 +22,10 @@ const ProductCards = () => {
 
     return (
         <>
-            <h1 className="flex flex-col items-center font-bold text-2xl md:text-4xl text-teal-600 pt-10">
+        <div className="min-h-screen bg-cover bg-center  items-center justify-center"
+                style={{ backgroundImage: "url('https://img.freepik.com/premium-photo/blurry-image-counter-with-blurry-background_1031776-178157.jpg?w=1060')" }}>
+
+            <h1 className="flex flex-col items-center font-bold text-4xl md:text-4xl text-teal-800  pt-10">
                 Our Products
             </h1>
             {loading ? (
@@ -34,6 +37,7 @@ const ProductCards = () => {
                     ))}
                 </div>
             )}
+            </div>
         </>
     );
 };

@@ -5,17 +5,17 @@ const Product = require('../models/product');
 const verifyToken = require('../middleware/authMiddleware');
 
 
-router.get('/', verifyToken, async (req, res) => {
+
+router.get('/profile', verifyToken, async (req, res) => {
     try {
         const user = await User.findOne({ email: req.userEmail }).select('-password');
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        
         const populatedCart = await Promise.all(user.cart.map(async item => {
             const product = await Product.findOne({ productId: item.productId });
-            return { ...item.toObject(), product };
+            return { ...item.toObject(), productName: product.productName, productPrice: product.productPrice };
         }));
 
         res.json({ user: { ...user.toObject(), cart: populatedCart } });
@@ -24,6 +24,7 @@ router.get('/', verifyToken, async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch profile' });
     }
 });
+
 
 
 router.put('/', verifyToken, async (req, res) => {

@@ -8,6 +8,7 @@ const EditProductPage = () => {
   const [productId,setProductId] = useState(product.productId);
   const [productDescription,setProductDescription] = useState(product.productDescription);
   const [productPrice,setProductPrice] = useState(product.productPrice);
+  const [productQuantity,setProductQuantity] = useState(product.productQuantity);
 
   const navigate = useNavigate();
 
@@ -18,13 +19,15 @@ const EditProductPage = () => {
     productName,
     productId,
     productDescription,
-    productPrice
+    productPrice,
+    productQuantity
     };
 
     const res = updateProduct(updatedProduct);
-    toast.success("Product added successfully");
-    navigate("/product");
-    console.log(res);
+    console.log("respose fron update", res);
+    toast.success("Product updated successfully");
+    navigate("/products");
+    
   };
 
   const updateProduct = async (updatedProduct) => {
@@ -48,6 +51,23 @@ const EditProductPage = () => {
                 Update Product
               </h2>
 
+          
+
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2">
+                  Product Id
+                </label>
+                <input
+                  type="text"
+                  id="productId"
+                  name="productId"
+                  className="border rounded w-full py-2 px-3 mb-2"
+                  required
+                  value={productId}
+                  onChange={(e) => setProductId(e.target.value)}
+                />
+              </div>
+
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">
                   Product Name
@@ -66,16 +86,17 @@ const EditProductPage = () => {
 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">
-                  Product Id
+                  Product Quantity
                 </label>
                 <input
                   type="text"
-                  id="productId"
-                  name="productId"
+                  id="productQuantity"
+                  name="productQuantity"
                   className="border rounded w-full py-2 px-3 mb-2"
                   required
-                  value={productId}
-                  onChange={(e) => setProductId(e.target.value)}
+                  value={productQuantity}
+                  onChange={(e) => setProductQuantity(e.target.value)}
+
                 />
               </div>
 
@@ -115,6 +136,7 @@ const EditProductPage = () => {
                 />
 
               </div>
+
 
               <div>
                 <button

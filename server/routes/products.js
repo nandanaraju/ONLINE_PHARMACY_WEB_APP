@@ -4,14 +4,14 @@ const Product = require('../models/product');
 const verifyToken = require('../middleware/authMiddleware');
 
 
-router.post('/products',  async (req, res) => {
-    // if (req.userType !== 'admin') {
-    //     return res.status(403).json({ error: 'Access denied' });
-    // }
+router.post('/products',verifyToken,  async (req, res) => {
+    if (req.userType !== 'admin') {
+        return res.status(403).json({ error: 'Access denied' });
+    }
 
     try {
-        const { productId, productName, productDescription, productPrice } = req.body;
-        const product = new Product({ productId, productName, productDescription, productPrice });
+        const { productId, productName, productDescription, productPrice,productQuantity } = req.body;
+        const product = new Product({ productId, productName, productDescription, productPrice,productQuantity });
         await product.save();
         res.status(201).json({ message: 'Product created successfully', product });
     } catch (error) {
@@ -28,7 +28,7 @@ router.get("/products/:id",  async (req, res) => {
 
 router.get('/products', async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find({});
         res.status(200).json(products);
     } catch (error) {
         console.error('Fetching products error:', error);
@@ -38,17 +38,19 @@ router.get('/products', async (req, res) => {
 
 
 router.put('/products/:id', verifyToken, async (req, res) => {
-    if (req.userType !== 'admin') {
+    if (req.userType != 'admin') {
+        console.log("new1", userType)
         return res.status(403).json({ error: 'Access denied' });
     }
 
     try {
-        const { productId } = req.params;
-        const { productName, productDescription, productPrice } = req.body;
+        const  productId  = req.params.id;
+        console.log("new1", productId)
+        const { productName, productDescription, productPrice,productQuantity } = req.body;
 
         const updatedProduct = await Product.findOneAndUpdate(
             { productId },
-            { productName, productDescription, productPrice },
+            { productName, productDescription, productPrice,productQuantity },
             { new: true }
         );
 
@@ -70,10 +72,11 @@ router.delete('/products/:id', verifyToken, async (req, res) => {
     }
 
     try {
-        const { productId } = req.params;
+        const productId = req.params.id;
+        console.log(productId);
 
         const deletedProduct = await Product.findOneAndDelete({ productId });
-
+        console.log("work2");
         if (!deletedProduct) {
             return res.status(404).json({ error: 'Product not found' });
         }

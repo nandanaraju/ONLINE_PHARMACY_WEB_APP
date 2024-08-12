@@ -5,11 +5,12 @@ const Product = require('../models/product');
 const verifyToken = require('../middleware/authMiddleware');
 
 
-router.post('/add', verifyToken, async (req, res) => {
-    const { productId, quantity } = req.body;
+router.post('/add/:id/:quantity', verifyToken, async (req, res) => {
+    const { id, quantity } = req.params;
+    console.log(quantity);
 
     try {
-        const product = await Product.findOne({ productId });
+        const product = await Product.findOne({ productId: id });
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
         }
@@ -19,14 +20,22 @@ router.post('/add', verifyToken, async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        const existingProduct = user.cart.find(item => item.productId === productId);
-        if (existingProduct) {
-            existingProduct.quantity += quantity;
-        } else {
-            user.cart.push({ productId, quantity });
-        }
-        await user.save();
 
+
+
+        const existingProduct = user.cart.find(item => item.productId == id);
+        if (existingProduct) {
+          existingProduct.quantity=  Number(existingProduct.quantity )+ Number(quantity);
+        product.productQuantity-=existingProduct.quantity
+
+        } else {
+            user.cart.push({ productId:id, quantity:quantity });
+        product.productQuantity-=quantity
+
+        }
+        await User.updateOne({email:req.userEmail},{$set:user});
+
+        await Product.updateOne({productId:id},{$set:product});
         res.json({ message: 'Product added to cart', cart: user.cart });
     } catch (error) {
         console.error('Error adding product to cart:', error);
@@ -35,7 +44,10 @@ router.post('/add', verifyToken, async (req, res) => {
 });
 
 
-router.put('/update', verifyToken, async (req, res) => {
+
+
+
+router.put('/update/:id/:quantity', verifyToken, async (req, res) => {
     const { productId, quantity } = req.body;
 
     try {

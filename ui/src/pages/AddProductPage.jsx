@@ -7,6 +7,7 @@ const AddProductPage = () => {
   const [productId, setProductId] = useState('')
   const [productDescription, setProductDescription] = useState('')
   const [productPrice, setProductPrice] = useState('')
+  const [productQuantity, setProductQuantity] = useState('')
 
   const navigate = useNavigate()
 
@@ -17,7 +18,8 @@ const AddProductPage = () => {
       productName,
       productId,
       productDescription,
-      productPrice
+      productPrice,
+      productQuantity
     }
 
     const res = addProduct(newProduct)
@@ -27,7 +29,7 @@ const AddProductPage = () => {
   }
 
   const addProduct = async (newProduct) => {
-    const res = await fetch('http://localhost:5000/products', {
+    const res = await fetch('api/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -47,6 +49,23 @@ const AddProductPage = () => {
                 Add Product
               </h2>
 
+        
+
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2">
+                  Product Id
+                </label>
+                <input
+                  type="text"
+                  id="productId"
+                  name="productId"
+                  className="border rounded w-full py-2 px-3 mb-2"
+                  required
+                  value={productId}
+                  onChange={(e) => setProductId(e.target.value)}
+                />
+              </div>
+
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">
                   Product Name
@@ -65,16 +84,17 @@ const AddProductPage = () => {
 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">
-                  Product Id
+                  Product Quantity
                 </label>
                 <input
                   type="text"
-                  id="productId"
-                  name="productId"
+                  id="productQuantity"
+                  name="productQuantity"
                   className="border rounded w-full py-2 px-3 mb-2"
                   required
-                  value={productId}
-                  onChange={(e) => setProductId(e.target.value)}
+                  value={productQuantity}
+                  onChange={(e) => setProductQuantity(e.target.value)}
+
                 />
               </div>
 
@@ -114,6 +134,8 @@ const AddProductPage = () => {
                 />
 
               </div>
+
+             
 
               <div>
                 <button

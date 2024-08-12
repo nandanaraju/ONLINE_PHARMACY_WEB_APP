@@ -10,7 +10,6 @@ function verifyToken(req, res, next) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.userType = decoded.userType; 
         req.userEmail = decoded.email; 
-        // req.userId = decoded.userId; // If needed
         next();
     } catch (error) {
         console.log('Token verification error:', error);

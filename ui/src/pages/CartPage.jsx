@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const CartPage = () => {
     const [cart, setCart] = useState([]);
@@ -8,18 +9,18 @@ const CartPage = () => {
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const response = await fetch('/api/cart',{
+                const response = await fetch('/api/profile', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ productId, quantity }),
+                    },
+                });
 
-                    });
-                
                 const data = await response.json();
-                setCart(data.cart);
-                calculateTotal(data.cart);
+                console.log('cartdata', data.user.cart);
+
+                setCart(data.user.cart);
+                calculateTotal(data.user.cart);
             } catch (error) {
                 console.error('Error fetching cart data:', error);
             }
@@ -53,7 +54,7 @@ const CartPage = () => {
 
     const handleRemove = async (productId) => {
         try {
-            const response = await fetch('/api/cart/remove', {
+            const response = await fetch('/api/remove', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,28 +76,14 @@ const CartPage = () => {
 
     const calculateTotal = (cart) => {
         let newTotal = cart.reduce((acc, item) => {
-            return acc + item.price * item.quantity;
+            return acc + item.productPrice * item.quantity;
         }, 0);
         setTotal(newTotal);
     };
 
     return (
         <>
-            <nav className="bg-teal-500 p-3 sticky top-0">
-                <div className="container mx-auto flex justify-between items-center">
-                    <div className="text-white font-bold text-xl ml-10">
-                        Carewell Pharmacy
-                    </div>
-                    <ul className="flex space-x-8">
-                        <li><Link to="/" className="text-white font-bold text-large hover:text-opacity-75">Home</Link></li>
-                        <li><Link to="/products" className="text-white font-bold text-large hover:text-opacity-75">Products</Link></li>
-                        <li><Link to="/contact" className="text-white font-bold text-large hover:text-opacity-75">Contact Us</Link></li>
-                    </ul>
-                    <div>
-                        <Link to="/" className="bg-white text-teal-500 font-bold text-sm px-5 py-3 rounded-full">Logout</Link>
-                    </div>
-                </div>
-            </nav>
+            <Navbar/>
             <main className="container mx-auto mt-8">
                 <section className="text-center">
                     <h2 className="text-4xl mb-4 font-bold text-teal-600">Shopping Cart</h2>
@@ -113,19 +100,12 @@ const CartPage = () => {
                             </thead>
                             <tbody>
                                 {cart.map(item => (
+                                    
                                     <tr key={item.productId}>
                                         <td className="py-2">{item.productName}</td>
-                                        <td className="py-2">{item.price}</td>
-                                        <td className="py-2">
-                                            <input
-                                                type="number"
-                                                value={item.quantity}
-                                                min="1"
-                                                className="border rounded px-2 py-1 w-full"
-                                                onChange={(e) => handleQuantityChange(item.productId, parseInt(e.target.value, 10))}
-                                            />
-                                        </td>
-                                        <td className="py-2">{item.price * item.quantity}</td>
+                                        <td className="py-2">₹ {item.productPrice}</td>
+                                        <td className="py-2">{item.quantity}</td>
+                                        <td className="py-2">₹ {item.productPrice * item.quantity}</td>
                                         <td className="py-2 text-center">
                                             <button
                                                 className="text-rose-600 px-4 py-2 rounded"
@@ -139,12 +119,18 @@ const CartPage = () => {
                             </tbody>
                         </table>
                         <div className="flex justify-end mt-4">
-                            <p className="font-bold">Total: {total}</p>
+                            <p className="font-bold">Total: ₹ {total}</p>
                         </div>
-                        <Link to="/checkout" className="bg-teal-500 text-white font-bold py-2 px-4 rounded shadow mt-4 inline-block">Proceed to Checkout</Link>
+                        <div className="flex mt-4 justify-center gap-6">
+                            <Link to="/products" className="bg-teal-500 text-white font-bold py-2 px-4 rounded shadow mt-4 inline-block">Back to products</Link>
+                            <Link to="/checkout" className="bg-teal-500 text-white font-bold py-2 px-4 rounded shadow mt-4 inline-block">Proceed to Checkout</Link>
+                        </div>
                     </div>
                 </section>
             </main>
+            <footer className="mt-16 text-center text-gray-500">
+                © 2024 Carewell Pharmacy. All rights reserved.
+            </footer>
         </>
     );
 };
