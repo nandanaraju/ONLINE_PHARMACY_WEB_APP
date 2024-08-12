@@ -64,3 +64,9 @@ JWT (JSON Web Tokens): For securing user authentication and managing sessions.
       docker-compose up --build
   3.Accessing the Application
       Once the containers are up and running, you can access the application at:localhost:3001
+
+
+
+   **Screen Record Link**
+
+   https://drive.google.com/file/d/19vzeD5mkt30CTSqPdK4qz-ykJ55B-Ps0/view?usp=sharing
