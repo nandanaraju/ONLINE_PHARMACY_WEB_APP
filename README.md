@@ -1,72 +1,55 @@
- # ONLINE PHARMACY WEB APP
+# 🏥 **ONLINE PHARMACY WEB APP**
 
+**📄 PROJECT OVERVIEW**
 
-**PROJECT OVERVIEW**
+The Online Pharmacy Web Application provides a platform for users to browse and purchase medicines digitally. Built with the MERN stack (MongoDB, Express.js, React, and Node.js) and Docker for containerization, the app offers a seamless experience for users to manage accounts, place orders, and contact support. Admins have specific roles, including product, prescription, and message management. Admin login is restricted by a secure admin passphrase.
 
-The online pharmacy web application allows users to browse, and purchase medicines from a digital platform.
-Built using the MERN stack (MongoDB, Express.js, React, and Node.js), and Docker for containerization. 
-The app provides a seamless experience for users to manage their accounts and purcahse medicines as they needed.
-Also there have a field for get in touch with contact us page.
-The admin can specific role in this project such as product management ,prescription management and also message management.
-And the admin can login only by the admin passphrase.
+---
 
+**🔑 FEATURES**
 
+### **👤 User**
+- **Login & Signup**: Secure user authentication.
+- **Home**: Product information is accessible even without signup.
+- **🛒 Product Page**: Each medicine has a dedicated page with details such as name, description, price, and available stock.
+- **🛍️ Cart Management**: Users can add, edit, or delete products in their cart.
+- **📞 Contact Us**: A messaging system for user inquiries.
+- **📝 Checkout**: A page for uploading prescriptions.
+- **🚪 Logout**: End the session securely.
 
+### **🔒 Admin**
+- **Admin Authentication**: Secure login through an admin passphrase.
+- **📊 Dashboard**: Manage products (add, edit, delete).
+- **📩 Message Management**: Access messages from users.
+- **🧾 Prescription Management**: Review uploaded prescriptions during checkout.
+- **🚪 Logout**: End the session securely.
 
-**FEATURES**
+---
 
-   **User**
-Login & Signup: Secure user authentication.
+**⚙️ TECHNOLOGIES USED**
 
-Home:  Without signup user can get product informations.
+- **Frontend**: React.js
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Containerization**: Docker
 
-Product page:Each medicine has a dedicated page displaying detailed information such as name,description, price, and available stock.
+---
 
-Cart Adding:User can add/edit/delete products from/to cart
+**🛠️ OTHER TOOLS**
 
-Contact us:Message system
+- **Multer**: Handles prescription uploads.
+- **JWT (JSON Web Tokens)**: Secures user authentication and manages sessions.
 
-Chekout:Prescription adding page
+---
 
-Logout: Securely end your session.
+**🚀 GETTING STARTED**
 
-   **Admin**
- Login & Signup: Secure admin authentication through admin passphrase.
- 
- Dashboard:Product Management(add,edit,delete).
- 
- Message management:Get message from user.
- 
- Checkout management:Check prescription uploadings
- 
- Logout: Securely end your session.
+1. **Clone the Repository**: `git clone <repository-url>`
+2. **Docker Setup**: `docker-compose up --build`
+3. **Accessing the Application**: Once the containers are up, visit `localhost:3001` to access the app.
 
+---
 
-**TECHNOLOGIES USED**
- 
-Frontend: React.js
-Backend: Node.js, Express.js
-Database: MongoDB
-Containerization: Docker
+**📹 Screen Recording Link**
 
-
-**OTHER TOOLS**
-
-Multer: For handling prescription uploads.
-JWT (JSON Web Tokens): For securing user authentication and managing sessions.
-
-
-
-**GETTING STARTED**
-
-  1.Clone the Repository
-  2.Docker Setup
-      docker-compose up --build
-  3.Accessing the Application
-      Once the containers are up and running, you can access the application at:localhost:3001
-
-
-
-   **Screen Record Link**
-
-   https://drive.google.com/file/d/19vzeD5mkt30CTSqPdK4qz-ykJ55B-Ps0/view?usp=sharing
+[Screen Recording](https://drive.google.com/file/d/19vzeD5mkt30CTSqPdK4qz-ykJ55B-Ps0/view?usp=sharing)
