@@ -50,6 +50,6 @@ The Online Pharmacy Web Application provides a platform for users to browse and 
 
 ---
 
-**📹 Screen Recording Link**
+**📹 Demo Video Link**
 
-[Screen Recording](https://drive.google.com/file/d/19vzeD5mkt30CTSqPdK4qz-ykJ55B-Ps0/view?usp=sharing)
+[Demo Video](https://youtu.be/ScJ48eiT0zs)
